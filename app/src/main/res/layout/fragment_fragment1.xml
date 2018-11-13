@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/holo_green_light"
+    tools:context=".Fragment1">
+
+    <!-- TODO: Update blank fragment layout -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Fragment1"
+            android:textSize="24sp" />
+
+        <EditText
+            android:id="@+id/missatgeAEnviar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:text="Name" />
+
+        <Button
+            android:id="@+id/b_f2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="A Fragment 2" />
+
+        <Button
+            android:id="@+id/b_f3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="A FRAGMENT 3" />
+    </LinearLayout>
+
+</FrameLayout>
