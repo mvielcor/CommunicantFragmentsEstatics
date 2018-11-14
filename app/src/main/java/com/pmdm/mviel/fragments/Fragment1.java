@@ -12,35 +12,29 @@ import android.widget.EditText;
 
 
 /**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link Fragment1.ComunicaFragment1AmbActivity} interface
- * to handle interaction events.
- * Use the {@link Fragment1#newInstance} factory method to
- * create an instance of this fragment.
+ * Aquest Fragment sí que s'ha de comunicar amb l'activity, per tant crearem una interface
+ * de comunicació {@link Fragment1.ComunicaFragment1AmbActivity}.
+ * Aquest fragment rebrà un missatge en un objecte EditText, i depenent del botó que polse l'usuari
+ * enviarà eixe missatge a un fragment o a un altre.
+ *
  */
 public class Fragment1 extends Fragment implements View.OnClickListener{
 
-    private EditText tv_missatge;
-    private Button b2,b3;
-    private ComunicaFragment1AmbActivity mListener;
+    private EditText tv_missatge; // Objecte on escriurem el missatge
+    private Button b2,b3;       //Botons per enviar el missatge al fragment 2 o al fragment 3
+    private ComunicaFragment1AmbActivity mListener;  //Objecte que ens permetrà comunicar el
+                                                      // fragment amb l'activity
 
     public Fragment1() {
         // Required empty public constructor
     }
 
     /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment Fragment1.
+     * Com que no rebrem paràmetres, eliminem la gestió dels paràmetres.
      */
-    // TODO: Rename and change types and number of parameters
+
     public static Fragment1 newInstance(String param1, String param2) {
         Fragment1 fragment = new Fragment1();
-
         return fragment;
     }
 
@@ -60,8 +54,10 @@ public class Fragment1 extends Fragment implements View.OnClickListener{
         b2 = v.findViewById(R.id.b_f2);
         b3 = v.findViewById(R.id.b_f3);
 
+        //Als dos botons els afegim un listener per a escoltar els event de click
         b2.setOnClickListener(this);
         b3.setOnClickListener(this);
+
         return v;
     }
 
@@ -70,18 +66,21 @@ public class Fragment1 extends Fragment implements View.OnClickListener{
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
+        //comprovem si tenim l'activity que conté este fragment implementa la interficie requerida
         if (context instanceof ComunicaFragment1AmbActivity) {
             mListener = (ComunicaFragment1AmbActivity) context;
         } else {
             throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
+                    + " has d'implementar la interfície ComunicaFragment1AmbActivity");
         }
     }
 
     @Override
     public void onDetach() {
         super.onDetach();
-        mListener = null;
+        mListener = null; //Asignem null a l'objecte que ens permetrà la comunicació amb l'activity
+                            // per a evitar "fugues de memòria", i que el garbage collector puga
+                            // alliberar eixa memòria.
     }
 
     @Override
@@ -107,7 +106,7 @@ public class Fragment1 extends Fragment implements View.OnClickListener{
      * >Communicating with Other Fragments</a> for more information.
      */
     public interface ComunicaFragment1AmbActivity {
-        // TODO: Update argument type and name
+        // Mètode que ens enviarà el botó polsat i el missatge a enviar a l'activity
         void enviaMissatgeEscritAActivity(int destinatari,String missatge);
     }
 }
