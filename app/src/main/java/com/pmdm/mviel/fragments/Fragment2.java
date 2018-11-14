@@ -3,6 +3,8 @@ package com.pmdm.mviel.fragments;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+// IMPORTANT!!!! comproveu si esteu utilitzant la versió de suport dels Fragments, tant ací com
+//               a les classes Fragment
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
