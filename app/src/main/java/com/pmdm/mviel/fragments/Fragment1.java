@@ -5,12 +5,14 @@ import android.os.Bundle;
 // IMPORTANT!!!! comproveu si esteu utilitzant la versió de suport dels Fragments, tant ací com
 //               a les classes Fragment
 import android.support.v4.app.Fragment;
+import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 
 /**
@@ -24,6 +26,7 @@ public class Fragment1 extends Fragment implements View.OnClickListener{
 
     private EditText tv_missatge; // Objecte on escriurem el missatge
     private Button b2,b3;       //Botons per enviar el missatge al fragment 2 o al fragment 3
+    private TextView tv_missatgesRebutjats;
     private ComunicaFragment1AmbActivity mListener;  //Objecte que ens permetrà comunicar el
                                                       // fragment amb l'activity
 
@@ -53,6 +56,7 @@ public class Fragment1 extends Fragment implements View.OnClickListener{
         View v= inflater.inflate(R.layout.fragment_fragment1, container, false);
         // Assignem objectes a elements de l'XML
         tv_missatge = v.findViewById(R.id.missatgeAEnviar);
+        tv_missatgesRebutjats = v.findViewById(R.id.tv_missatges_rebutjats);
         b2 = v.findViewById(R.id.b_f2);
         b3 = v.findViewById(R.id.b_f3);
 
@@ -95,6 +99,16 @@ public class Fragment1 extends Fragment implements View.OnClickListener{
             Log.d("Manel","He entrat en 3 ");
             mListener.enviaMissatgeEscritAActivity(3,tv_missatge.getText().toString());
         }
+    }
+
+    public void afegeixMissatgeRebutjat(int fragmentOrigen, String missatge){
+        if (fragmentOrigen==2){
+            tv_missatgesRebutjats.setText(Html.fromHtml("<font color='red'>f2: "+missatge+"</font></br>",Html.FROM_HTML_OPTION_USE_CSS_COLORS));
+
+        }else{
+            tv_missatgesRebutjats.setText(tv_missatgesRebutjats.getText().toString()+"\n"+missatge);
+        }
+
     }
 
     /**
