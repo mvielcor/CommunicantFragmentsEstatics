@@ -5,7 +5,7 @@ import android.support.v4.app.FragmentManager;
 //               a les classes Fragment
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
+
 
 public class MainActivity extends AppCompatActivity implements Fragment1.ComunicaFragment1AmbActivity,
                                                                 Fragment2.ComunicaFragment2AmbActivity {
@@ -29,11 +29,9 @@ public class MainActivity extends AppCompatActivity implements Fragment1.Comunic
     @Override
     public void enviaMissatgeEscritAActivity(int destinatari,String missatge) {
         if(destinatari==2){
-            Log.d("Manel","Al fragment2: "+missatge);
             f2.escriuMissatge(missatge);  //indiquem al fragment2 que modifique el missatge,
                                           // i pose el que ens ha comunicat el fragment1
         }else{
-            Log.d("Manel","Al fragment1: "+missatge);
             f3.escriuMissatge(missatge);  //indiquem al fragment3 que modifique el missatge,
                                           // i pose el que ens ha comunicat el fragment1
         }
@@ -42,6 +40,7 @@ public class MainActivity extends AppCompatActivity implements Fragment1.Comunic
 
     @Override
     public void notificaMissatgeRebutjat(int numFragment, String missatgeRebutjat) {
+
         if(numFragment==2){
             f1.afegeixMissatgeRebutjat(2,missatgeRebutjat);
         }else{

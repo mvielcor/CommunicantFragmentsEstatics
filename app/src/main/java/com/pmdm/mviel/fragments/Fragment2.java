@@ -59,7 +59,7 @@ public class Fragment2 extends Fragment implements View.OnClickListener{
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v =inflater.inflate(R.layout.fragment_fragment2, container, false);
-        fragmentId = v.getId();
+
         //Enllacem l'objecte TextView amb l'element XML definit al layout fragment_fragment2.xml
         tv_missatge = v.findViewById(R.id.missatge);
         btn_rebutjar = v.findViewById(R.id.btn_rebutjar_missatge);
@@ -74,6 +74,7 @@ public class Fragment2 extends Fragment implements View.OnClickListener{
         super.onAttach(context);
         if(context instanceof ComunicaFragment2AmbActivity){
             comunicador  = (ComunicaFragment2AmbActivity) context;
+            fragmentId = getId(); //Obtenim l'identificador per saber si entem al <fragment2> o <fragment3> dins MainActivity
         }else{
             new RuntimeException(context.toString()
                     + " has d'implementar la interfície ComunicaFragment1AmbActivity");

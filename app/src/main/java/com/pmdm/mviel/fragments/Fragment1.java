@@ -6,7 +6,9 @@ import android.os.Bundle;
 //               a les classes Fragment
 import android.support.v4.app.Fragment;
 import android.text.Html;
-import android.util.Log;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.SpannableStringBuilder;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -92,23 +94,29 @@ public class Fragment1 extends Fragment implements View.OnClickListener{
     @Override
     public void onClick(View v) {
         if(v.getId()==R.id.b_f2){
-            Log.d("Manel","He entrat en 2 ");
             mListener.enviaMissatgeEscritAActivity(2,tv_missatge.getText().toString());
         }
         if(v.getId()==R.id.b_f3){
-            Log.d("Manel","He entrat en 3 ");
             mListener.enviaMissatgeEscritAActivity(3,tv_missatge.getText().toString());
         }
     }
 
     public void afegeixMissatgeRebutjat(int fragmentOrigen, String missatge){
+        /* Utilitzem la classe SpannableString per a cadenes de text que mostraran format HTML,
+           però seran IMMUTABLES durant l'execució d'aquest mètode
+         */
+        SpannableString missatgeInicial = new SpannableString(tv_missatgesRebutjats.getText());
+        /* Utilitzem SpannableStringBuilder per a cadenes de text que mostraran format HTML , però
+           el seu contingut serà alterable durant l'execució d'aquest mètode
+         */
+        SpannableStringBuilder missatgeFinal = new SpannableStringBuilder(Html.toHtml(missatgeInicial,Html.FROM_HTML_MODE_COMPACT));
+
         if (fragmentOrigen==2){
-            tv_missatgesRebutjats.setText(Html.fromHtml("<font color='red'>f2: "+missatge+"</font></br>",Html.FROM_HTML_OPTION_USE_CSS_COLORS));
-
+            missatgeFinal.append("<font color='red'>f2: "+missatge+"</font>\n");
         }else{
-            tv_missatgesRebutjats.setText(tv_missatgesRebutjats.getText().toString()+"\n"+missatge);
+            missatgeFinal.append("<font color='blue'>f3: "+missatge+"</font>\n");
         }
-
+        tv_missatgesRebutjats.setText(Html.fromHtml(missatgeFinal.toString(),Html.FROM_HTML_MODE_COMPACT));
     }
 
     /**
